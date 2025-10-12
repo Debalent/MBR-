@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MBR Records - Digital Music Label Platform. Discover amazing music from independent artists.">
+    <meta name="keywords" content="music, record label, streaming, independent artists, demos, digital music">
+    <title>MBR Records - Digital Music Label Platform</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/logo/MBR-Logo.svg">
+    
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#ff6b35">
+    
+    <!-- Open Graph meta tags for social sharing -->
+    <meta property="og:title" content="MBR Records - Digital Music Label Platform">
+    <meta property="og:description" content="Discover amazing music from independent artists on MBR Records.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mbrrecords.com">
+    <meta property="og:image" content="/assets/logo/MBR-Logo.svg">
+    
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MBR Records - Digital Music Label Platform">
+    <meta name="twitter:description" content="Discover amazing music from independent artists on MBR Records.">
+    <meta name="twitter:image" content="/assets/logo/MBR-Logo.svg">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="/assets/logo/MBR-Logo.svg">
+    
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <style>
+        /* Critical CSS for loading states */
+        #root {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .loading-fallback {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .loading-fallback__logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        .loading-fallback__text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        
+        .loading-fallback__subtext {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 107, 53, 0.3);
+            border-top: 3px solid #ff6b35;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: 2rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Hide loading fallback when React loads */
+        .react-loaded .loading-fallback {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <noscript>
+        <div style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #1a1a2e;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            padding: 2rem;
+        ">
+            <h1 style="color: #ff6b35; margin-bottom: 1rem;">JavaScript Required</h1>
+            <p style="color: #b0b0b0; max-width: 500px;">
+                MBR Records requires JavaScript to be enabled in your browser to function properly. 
+                Please enable JavaScript and reload the page to continue.
+            </p>
+        </div>
+    </noscript>
+    
+    <div id="root">
+        <!-- Loading fallback while React loads -->
+        <div class="loading-fallback">
+            <img src="/assets/logo/MBR-Logo.svg" alt="MBR Records" class="loading-fallback__logo" onerror="this.style.display='none'">
+            <div class="loading-fallback__text">MBR Records</div>
+            <div class="loading-fallback__subtext">Loading your music experience...</div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Mark as React loaded when the app starts
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.body.classList.add('react-loaded');
+            }, 100);
+        });
+        
+        // Service Worker registration for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

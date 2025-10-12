@@ -1,0 +1,157 @@
+{
+  "name": "MBR Records - Digital Music Label Platform",
+  "short_name": "MBR Records",
+  "description": "Discover amazing music from independent artists on MBR Records",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#ff6b35",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["music", "entertainment", "media"],
+  "icons": [
+    {
+      "src": "/assets/logo/MBR-Logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/assets/screenshots/desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "MBR Records Desktop Experience"
+    },
+    {
+      "src": "/assets/screenshots/mobile.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "MBR Records Mobile Experience"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Browse Music",
+      "short_name": "Browse",
+      "url": "/browse",
+      "icons": [
+        {
+          "src": "/assets/icons/browse-icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Submit Demo",
+      "short_name": "Demo",
+      "url": "/submit-demo",
+      "icons": [
+        {
+          "src": "/assets/icons/demo-icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Artist Directory",
+      "short_name": "Artists",
+      "url": "/artists",
+      "icons": [
+        {
+          "src": "/assets/icons/artists-icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.mbrrecords.app",
+      "id": "com.mbrrecords.app"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/app/mbr-records/id123456789"
+    }
+  ],
+  "prefer_related_applications": false,
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "audio",
+          "accept": ["audio/*", ".mp3", ".wav", ".flac"]
+        }
+      ]
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+music",
+      "url": "/play?track=%s"
+    }
+  ]
+}

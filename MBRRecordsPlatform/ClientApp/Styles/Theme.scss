@@ -1,0 +1,638 @@
+// MBR Records Platform - Theme Configuration
+// Advanced SCSS theme system with sophisticated design tokens
+
+// ========================================================================
+// Color System - SoundCloud Inspired with Modern Enhancements
+// ========================================================================
+
+$colors: (
+  // Primary Brand Colors
+  primary: (
+    orange: #ff5722,
+    orange-dark: #e64a19,
+    orange-light: #ff8a65,
+    orange-50: rgba(255, 87, 34, 0.05),
+    orange-100: rgba(255, 87, 34, 0.1),
+    orange-200: rgba(255, 87, 34, 0.2),
+    orange-300: rgba(255, 87, 34, 0.3)
+  ),
+  
+  // Accent Colors
+  accent: (
+    blue: #1976d2,
+    blue-dark: #1565c0,
+    blue-light: #42a5f5,
+    purple: #9c27b0,
+    teal: #00acc1,
+    green: #4caf50
+  ),
+  
+  // Background System
+  background: (
+    dark: #0f0f0f,
+    medium: #1a1a1a,
+    light: #2a2a2a,
+    card: #1e1e1e,
+    elevated: #252525,
+    overlay: rgba(0, 0, 0, 0.8)
+  ),
+  
+  // Text System
+  text: (
+    primary: #ffffff,
+    secondary: #b3b3b3,
+    muted: #666666,
+    disabled: #444444,
+    inverse: #000000
+  ),
+  
+  // Border System
+  border: (
+    default: #333333,
+    light: #444444,
+    dark: #222222,
+    focus: #ff5722
+  ),
+  
+  // State Colors
+  state: (
+    success: #4caf50,
+    warning: #ff9800,
+    error: #f44336,
+    info: #2196f3
+  )
+);
+
+// ========================================================================
+// Typography System
+// ========================================================================
+
+$fonts: (
+  primary: ('Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif),
+  secondary: ('Poppins', sans-serif),
+  mono: ('Fira Code', 'Monaco', 'Cascadia Code', monospace),
+  display: ('Poppins', sans-serif)
+);
+
+$font-weights: (
+  light: 300,
+  normal: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  extrabold: 800
+);
+
+$font-sizes: (
+  xs: 0.75rem,    // 12px
+  sm: 0.875rem,   // 14px
+  base: 1rem,     // 16px
+  lg: 1.125rem,   // 18px
+  xl: 1.25rem,    // 20px
+  2xl: 1.5rem,    // 24px
+  3xl: 1.875rem,  // 30px
+  4xl: 2.25rem,   // 36px
+  5xl: 3rem,      // 48px
+  6xl: 3.75rem,   // 60px
+  7xl: 4.5rem,    // 72px
+  8xl: 6rem,      // 96px
+  9xl: 8rem       // 128px
+);
+
+$line-heights: (
+  none: 1,
+  tight: 1.25,
+  snug: 1.375,
+  normal: 1.5,
+  relaxed: 1.625,
+  loose: 2
+);
+
+// ========================================================================
+// Spacing System
+// ========================================================================
+
+$spacing: (
+  0: 0,
+  px: 1px,
+  0-5: 0.125rem,  // 2px
+  1: 0.25rem,     // 4px
+  1-5: 0.375rem,  // 6px
+  2: 0.5rem,      // 8px
+  2-5: 0.625rem,  // 10px
+  3: 0.75rem,     // 12px
+  3-5: 0.875rem,  // 14px
+  4: 1rem,        // 16px
+  5: 1.25rem,     // 20px
+  6: 1.5rem,      // 24px
+  7: 1.75rem,     // 28px
+  8: 2rem,        // 32px
+  9: 2.25rem,     // 36px
+  10: 2.5rem,     // 40px
+  11: 2.75rem,    // 44px
+  12: 3rem,       // 48px
+  14: 3.5rem,     // 56px
+  16: 4rem,       // 64px
+  20: 5rem,       // 80px
+  24: 6rem,       // 96px
+  28: 7rem,       // 112px
+  32: 8rem,       // 128px
+  36: 9rem,       // 144px
+  40: 10rem,      // 160px
+  44: 11rem,      // 176px
+  48: 12rem,      // 192px
+  52: 13rem,      // 208px
+  56: 14rem,      // 224px
+  60: 15rem,      // 240px
+  64: 16rem,      // 256px
+  72: 18rem,      // 288px
+  80: 20rem,      // 320px
+  96: 24rem       // 384px
+);
+
+// ========================================================================
+// Border Radius System
+// ========================================================================
+
+$radius: (
+  none: 0,
+  sm: 0.125rem,   // 2px
+  default: 0.25rem, // 4px
+  md: 0.375rem,   // 6px
+  lg: 0.5rem,     // 8px
+  xl: 0.75rem,    // 12px
+  2xl: 1rem,      // 16px
+  3xl: 1.5rem,    // 24px
+  full: 9999px
+);
+
+// ========================================================================
+// Shadow System
+// ========================================================================
+
+$shadows: (
+  sm: (0 1px 2px 0 rgba(0, 0, 0, 0.05)),
+  default: (0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)),
+  md: (0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)),
+  lg: (0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)),
+  xl: (0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)),
+  2xl: (0 25px 50px -12px rgba(0, 0, 0, 0.25)),
+  inner: (inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)),
+  none: none,
+  
+  // Custom shadows for music player
+  glow: (0 0 20px rgba(255, 87, 34, 0.3)),
+  glow-lg: (0 0 40px rgba(255, 87, 34, 0.4)),
+  vinyl: (0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05)),
+  card-hover: (0 20px 40px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(255, 87, 34, 0.1))
+);
+
+// ========================================================================
+// Animation & Transition System
+// ========================================================================
+
+$transitions: (
+  none: none,
+  all: all 150ms ease-in-out,
+  default: all 150ms ease-in-out,
+  colors: color 150ms ease-in-out,
+  opacity: opacity 150ms ease-in-out,
+  shadow: box-shadow 150ms ease-in-out,
+  transform: transform 150ms ease-in-out,
+  fast: all 100ms ease-in-out,
+  slow: all 300ms ease-in-out,
+  slower: all 500ms ease-in-out
+);
+
+$easings: (
+  linear: linear,
+  ease: ease,
+  ease-in: ease-in,
+  ease-out: ease-out,
+  ease-in-out: ease-in-out,
+  
+  // Custom easing functions
+  bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55),
+  smooth: cubic-bezier(0.4, 0, 0.2, 1),
+  sharp: cubic-bezier(0.4, 0, 0.6, 1),
+  emphasized: cubic-bezier(0.25, 0.46, 0.45, 0.94)
+);
+
+// ========================================================================
+// Breakpoint System
+// ========================================================================
+
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+// Container max-widths
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+
+// ========================================================================
+// Z-Index System
+// ========================================================================
+
+$z-indexes: (
+  hide: -1,
+  auto: auto,
+  base: 0,
+  docked: 10,
+  dropdown: 1000,
+  sticky: 1010,
+  banner: 1020,
+  overlay: 1030,
+  modal: 1040,
+  popover: 1050,
+  skipLink: 1060,
+  toast: 1070,
+  tooltip: 1080
+);
+
+// ========================================================================
+// Component Specific Variables
+// ========================================================================
+
+// Header
+$header-height: 70px;
+$header-bg: rgba(15, 15, 15, 0.95);
+$header-backdrop-blur: 20px;
+
+// Sidebar
+$sidebar-width: 240px;
+$sidebar-width-collapsed: 60px;
+$sidebar-bg: map-get($colors, background, medium);
+
+// Music Player
+$player-height: 80px;
+$player-bg: map-get($colors, background, card);
+
+// Track Cards
+$track-card-width: 300px;
+$track-card-height: 200px;
+$track-card-gap: map-get($spacing, 6);
+
+// ========================================================================
+// Utility Mixins
+// ========================================================================
+
+// Get color utility
+@function color($group, $shade: default) {
+  @return map-get(map-get($colors, $group), $shade);
+}
+
+// Get spacing utility
+@function spacing($size) {
+  @return map-get($spacing, $size);
+}
+
+// Get font size utility
+@function font-size($size) {
+  @return map-get($font-sizes, $size);
+}
+
+// Get shadow utility
+@function shadow($size) {
+  @return map-get($shadows, $size);
+}
+
+// Media query mixins
+@mixin media-up($breakpoint) {
+  @media (min-width: map-get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
+
+@mixin media-down($breakpoint) {
+  @media (max-width: map-get($breakpoints, $breakpoint) - 1px) {
+    @content;
+  }
+}
+
+@mixin media-between($lower, $upper) {
+  @media (min-width: map-get($breakpoints, $lower)) and (max-width: map-get($breakpoints, $upper) - 1px) {
+    @content;
+  }
+}
+
+// Flexbox utilities
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Button mixins
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: spacing(2);
+  padding: spacing(2) spacing(4);
+  border: none;
+  border-radius: map-get($radius, md);
+  font-family: map-get($fonts, primary);
+  font-weight: map-get($font-weights, medium);
+  text-decoration: none;
+  cursor: pointer;
+  transition: map-get($transitions, all);
+  position: relative;
+  overflow: hidden;
+  
+  &:focus {
+    outline: 2px solid color(primary, orange);
+    outline-offset: 2px;
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background: linear-gradient(135deg, color(primary, orange) 0%, color(accent, blue) 100%);
+  color: color(text, primary);
+  box-shadow: shadow(md);
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: shadow(lg);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background: color(background, light);
+  color: color(text, primary);
+  border: 1px solid color(border, default);
+  
+  &:hover:not(:disabled) {
+    background: color(background, medium);
+    border-color: color(primary, orange);
+  }
+}
+
+// Card mixins
+@mixin card-base {
+  background: color(background, card);
+  border-radius: map-get($radius, lg);
+  padding: spacing(6);
+  box-shadow: shadow(md);
+  border: 1px solid color(border, default);
+  transition: map-get($transitions, all);
+}
+
+@mixin card-hover {
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: shadow(card-hover);
+    border-color: color(primary, orange);
+  }
+}
+
+// Text truncation
+@mixin text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Aspect ratio
+@mixin aspect-ratio($ratio: 1) {
+  position: relative;
+  
+  &::before {
+    content: '';
+    display: block;
+    padding-top: percentage(1 / $ratio);
+  }
+  
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Gradient text
+@mixin gradient-text($gradient: linear-gradient(135deg, #{color(primary, orange)} 0%, #{color(accent, blue)} 100%)) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+// Backdrop blur with fallback
+@mixin backdrop-blur($amount: 20px) {
+  backdrop-filter: blur($amount);
+  -webkit-backdrop-filter: blur($amount);
+  
+  // Fallback for browsers that don't support backdrop-filter
+  @supports not (backdrop-filter: blur($amount)) {
+    background: rgba(15, 15, 15, 0.95);
+  }
+}
+
+// Scrollbar styling
+@mixin custom-scrollbar($width: 8px, $track-color: transparent, $thumb-color: #{color(primary, orange)}) {
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $track-color;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $thumb-color;
+    border-radius: map-get($radius, sm);
+    
+    &:hover {
+      background: color(primary, orange-dark);
+    }
+  }
+}
+
+// ========================================================================
+// Animation Keyframes
+// ========================================================================
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes vinyl-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ========================================================================
+// CSS Custom Properties Export
+// ========================================================================
+
+:root {
+  // Colors
+  --color-primary-orange: #{color(primary, orange)};
+  --color-primary-orange-dark: #{color(primary, orange-dark)};
+  --color-primary-orange-light: #{color(primary, orange-light)};
+  --color-accent-blue: #{color(accent, blue)};
+  --color-background-dark: #{color(background, dark)};
+  --color-background-medium: #{color(background, medium)};
+  --color-background-light: #{color(background, light)};
+  --color-background-card: #{color(background, card)};
+  --color-text-primary: #{color(text, primary)};
+  --color-text-secondary: #{color(text, secondary)};
+  --color-text-muted: #{color(text, muted)};
+  --color-border-default: #{color(border, default)};
+  
+  // Spacing
+  --spacing-xs: #{spacing(1)};
+  --spacing-sm: #{spacing(2)};
+  --spacing-md: #{spacing(4)};
+  --spacing-lg: #{spacing(6)};
+  --spacing-xl: #{spacing(8)};
+  --spacing-2xl: #{spacing(12)};
+  
+  // Typography
+  --font-size-xs: #{font-size(xs)};
+  --font-size-sm: #{font-size(sm)};
+  --font-size-base: #{font-size(base)};
+  --font-size-lg: #{font-size(lg)};
+  --font-size-xl: #{font-size(xl)};
+  --font-size-2xl: #{font-size(2xl)};
+  --font-size-3xl: #{font-size(3xl)};
+  
+  // Shadows
+  --shadow-sm: #{shadow(sm)};
+  --shadow-md: #{shadow(md)};
+  --shadow-lg: #{shadow(lg)};
+  --shadow-xl: #{shadow(xl)};
+  --shadow-glow: #{shadow(glow)};
+  
+  // Transitions
+  --transition-fast: #{map-get($transitions, fast)};
+  --transition-default: #{map-get($transitions, default)};
+  --transition-slow: #{map-get($transitions, slow)};
+  
+  // Layout
+  --header-height: #{$header-height};
+  --sidebar-width: #{$sidebar-width};
+  --player-height: #{$player-height};
+  
+  // Border radius
+  --radius-sm: #{map-get($radius, sm)};
+  --radius-md: #{map-get($radius, md)};
+  --radius-lg: #{map-get($radius, lg)};
+  --radius-xl: #{map-get($radius, xl)};
+  --radius-full: #{map-get($radius, full)};
+}

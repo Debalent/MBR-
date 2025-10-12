@@ -1,0 +1,818 @@
+/* ========================================================================
+   MBR Records Platform - SoundCloud Inspired Layout
+   Advanced layout system with sophisticated animations and effects
+   ======================================================================== */
+
+/* ========================================================================
+   Header Navigation - SoundCloud Style
+   ======================================================================== */
+
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-fixed);
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+  transition: all var(--transition-normal);
+}
+
+.main-header.scrolled {
+  background: rgba(15, 15, 15, 0.98);
+  box-shadow: var(--shadow-lg);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-orange);
+  text-decoration: none;
+}
+
+.navbar-brand img {
+  height: 40px;
+  width: auto;
+  transition: transform var(--transition-fast);
+}
+
+.navbar-brand:hover img {
+  transform: scale(1.05);
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  list-style: none;
+}
+
+.nav-link {
+  position: relative;
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  border-radius: var(--radius-md);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--primary-orange);
+  transition: all var(--transition-fast);
+  transform: translateX(-50%);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+  background: rgba(255, 87, 34, 0.1);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 80%;
+}
+
+.navbar-search {
+  position: relative;
+  max-width: 400px;
+  flex: 1;
+  margin: 0 var(--spacing-xl);
+}
+
+.search-input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm) 3rem;
+  background: var(--background-light);
+  border: 1px solid var(--border-color);
+  border-radius: 25px;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  transition: all var(--transition-fast);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.1);
+  background: var(--background-medium);
+}
+
+.search-icon {
+  position: absolute;
+  left: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--primary-orange);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.user-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ========================================================================
+   Main Layout Structure
+   ======================================================================== */
+
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 70px; /* Header height */
+}
+
+.sidebar {
+  width: 240px;
+  background: var(--background-medium);
+  border-right: 1px solid var(--border-color);
+  padding: var(--spacing-lg);
+  position: fixed;
+  left: 0;
+  top: 70px;
+  bottom: 0;
+  overflow-y: auto;
+  transition: transform var(--transition-normal);
+  z-index: var(--z-sticky);
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+.sidebar-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.sidebar-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-md);
+}
+
+.sidebar-menu {
+  list-style: none;
+}
+
+.sidebar-menu-item {
+  margin-bottom: var(--spacing-xs);
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+  background: var(--background-light);
+  color: var(--text-primary);
+}
+
+.sidebar-link.active {
+  background: rgba(255, 87, 34, 0.1);
+  color: var(--primary-orange);
+}
+
+.sidebar-icon {
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 240px;
+  padding: var(--spacing-lg);
+  transition: margin-left var(--transition-normal);
+}
+
+.main-content.expanded {
+  margin-left: 0;
+}
+
+/* ========================================================================
+   Music Player - SoundCloud Style
+   ======================================================================== */
+
+.music-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--background-card);
+  border-top: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  z-index: var(--z-fixed);
+  backdrop-filter: blur(20px);
+}
+
+.player-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.player-track-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  min-width: 0;
+  flex: 1;
+}
+
+.track-artwork {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  box-shadow: var(--shadow-md);
+}
+
+.track-details {
+  min-width: 0;
+  flex: 1;
+}
+
+.track-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-artist {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.control-btn:hover {
+  color: var(--text-primary);
+  background: var(--background-light);
+}
+
+.control-btn.play-pause {
+  font-size: 1.5rem;
+  color: var(--primary-orange);
+  background: rgba(255, 87, 34, 0.1);
+}
+
+.control-btn.play-pause:hover {
+  background: rgba(255, 87, 34, 0.2);
+  transform: scale(1.05);
+}
+
+.player-progress {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.progress-time {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  min-width: 40px;
+  text-align: center;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--background-light);
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--primary-orange);
+  border-radius: 2px;
+  transition: width var(--transition-fast);
+}
+
+.progress-bar-handle {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background: var(--primary-orange);
+  border-radius: var(--radius-full);
+  transform: translate(50%, -50%);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.progress-bar:hover .progress-bar-handle {
+  opacity: 1;
+}
+
+.player-volume {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.volume-slider {
+  width: 80px;
+}
+
+/* ========================================================================
+   Track Cards - SoundCloud Style
+   ======================================================================== */
+
+.track-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.track-card {
+  background: var(--background-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  position: relative;
+}
+
+.track-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.track-card-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.track-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.track-card:hover .track-card-image img {
+  transform: scale(1.05);
+}
+
+.track-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.track-card:hover .track-card-overlay {
+  opacity: 1;
+}
+
+.play-btn-large {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-orange);
+  border: none;
+  border-radius: var(--radius-full);
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-lg);
+}
+
+.play-btn-large:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-glow);
+}
+
+.track-card-content {
+  padding: var(--spacing-lg);
+}
+
+.track-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-card-artist {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.track-card-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.track-card-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.action-btn:hover {
+  color: var(--primary-orange);
+  background: rgba(255, 87, 34, 0.1);
+}
+
+/* ========================================================================
+   Waveform Visualization
+   ======================================================================== */
+
+.waveform-container {
+  position: relative;
+  height: 80px;
+  margin: var(--spacing-md) 0;
+  background: var(--background-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.waveform {
+  width: 100%;
+  height: 100%;
+}
+
+.waveform-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-orange), var(--accent-blue));
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* ========================================================================
+   Artist Profile Layout
+   ======================================================================== */
+
+.artist-header {
+  position: relative;
+  height: 300px;
+  background: var(--gradient-dark);
+  display: flex;
+  align-items: end;
+  padding: var(--spacing-2xl);
+  margin-bottom: var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.artist-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  pointer-events: none;
+}
+
+.artist-info {
+  z-index: 1;
+}
+
+.artist-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-full);
+  border: 4px solid var(--primary-orange);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: var(--shadow-xl);
+}
+
+.artist-name {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.artist-stats {
+  display: flex;
+  gap: var(--spacing-xl);
+  color: var(--text-secondary);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ========================================================================
+   Responsive Breakpoints
+   ======================================================================== */
+
+@media (max-width: 1199px) {
+  .sidebar {
+    width: 200px;
+  }
+  
+  .main-content {
+    margin-left: 200px;
+  }
+  
+  .navbar-search {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 991px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .track-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  .navbar-search {
+    display: none;
+  }
+  
+  .artist-name {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .navbar-nav {
+    display: none;
+  }
+  
+  .track-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .player-container {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .player-progress {
+    order: -1;
+    width: 100%;
+  }
+  
+  .artist-header {
+    height: 200px;
+    padding: var(--spacing-lg);
+  }
+  
+  .artist-name {
+    font-size: 2rem;
+  }
+  
+  .artist-stats {
+    gap: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 575px) {
+  .main-layout {
+    padding-top: 60px;
+  }
+  
+  .music-player {
+    padding: var(--spacing-sm);
+  }
+  
+  .player-track-info {
+    min-width: 0;
+  }
+  
+  .track-artwork {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .progress-time {
+    font-size: 0.7rem;
+    min-width: 35px;
+  }
+  
+  .control-btn {
+    font-size: 1rem;
+    padding: var(--spacing-xs);
+  }
+  
+  .control-btn.play-pause {
+    font-size: 1.2rem;
+  }
+}
+
+/* ========================================================================
+   Dark Theme Enhancements
+   ======================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  .track-card-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+  }
+}
+
+/* ========================================================================
+   High Contrast Mode
+   ======================================================================== */
+
+@media (prefers-contrast: high) {
+  .track-card {
+    border: 2px solid var(--border-color);
+  }
+  
+  .nav-link::after {
+    height: 3px;
+  }
+  
+  .progress-bar {
+    height: 6px;
+  }
+  
+  .progress-bar-handle {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ========================================================================
+   Reduced Motion
+   ======================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .track-card:hover {
+    transform: none;
+  }
+  
+  .track-card:hover .track-card-image img {
+    transform: none;
+  }
+}
+
+/* ========================================================================
+   Print Optimizations
+   ======================================================================== */
+
+@media print {
+  .main-header,
+  .sidebar,
+  .music-player {
+    display: none !important;
+  }
+  
+  .main-content {
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .track-card {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+}
