@@ -1,21 +1,95 @@
-# MBR Records - Digital Music Label Platform
+<div align="center">
+  <img src="./assets/logo.svg" alt="MBR Records Logo" width="150" height="150" />
+  
+  # MBR Records - Digital Music Label Platform
+  
+  <p align="center">
+    <strong>A sophisticated, cross-platform digital record label platform with SoundCloud-inspired design</strong>
+  </p>
+  
+  <p align="center">
+    Built with React and Node.js
+  </p>
+  
+  <p align="center">
+    <a href="#quick-start">Quick Start</a> •
+    <a href="#features">Features</a> •
+    <a href="#architecture">Architecture</a> •
+    <a href="#deployment">Deployment</a> •
+    <a href="#contributing">Contributing</a>
+  </p>
+  
+  <p align="center">
+    <img src="https://img.shields.io/badge/React-18.0+-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt="React" />
+    <img src="https://img.shields.io/badge/Node.js-16.0+-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
+    <img src="https://img.shields.io/badge/MongoDB-4.4+-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
+    <img src="https://img.shields.io/badge/PWA-Ready-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white" alt="PWA" />
+  </p>
+</div>
 
-A sophisticated, cross-platform digital record label platform with SoundCloud-inspired design, built with React and Node.js.
+---
 
 ## 🎵 Platform Overview
 
 MBR Records is a complete digital music platform that provides everything needed to run a modern record label, from artist management and music distribution to fan engagement and analytics.
 
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Debalent/MBR-/main/MBRRecordsPlatform/ClientApp/public/screenshots/dashboard.png" alt="MBR Records Dashboard" width="600" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+  <p><em>MBR Records Dashboard - Modern SoundCloud-inspired interface</em></p>
+</div>
+
 ### ✨ Key Features
 
-- **🎧 Advanced Music Player** - Professional-grade player with queue management, visualizer, and full playback controls
-- **📱 Cross-Platform PWA** - Mobile app-like experience with offline functionality
-- **👤 Artist Management** - Comprehensive artist profiles, dashboards, and analytics
-- **💾 Flash Drive Integration** - Automated WAV file extraction and processing for studio workflows
-- **🎨 Professional UI** - SoundCloud-inspired design with modern, responsive interface
-- **⚡ Real-time Features** - Live chat, notifications, and music synchronization
-- **📊 Analytics Dashboard** - Detailed streaming statistics and performance insights
-- **🔧 Admin Panel** - Complete platform management and content moderation tools
+<table>
+<tr>
+<td width="50%">
+
+**🎧 Advanced Music Player**
+- Professional-grade player with queue management
+- Built-in visualizer and full playback controls
+- Shuffle/repeat modes and volume control
+
+**📱 Cross-Platform PWA**
+- Mobile app-like experience
+- Offline functionality with service worker
+- Install on any device
+
+**👤 Artist Management**
+- Comprehensive artist profiles and dashboards
+- Performance analytics and insights
+- Social media integration
+
+**💾 Flash Drive Integration**
+- Automated WAV file extraction
+- Studio workflow integration
+- Batch processing capabilities
+
+</td>
+<td width="50%">
+
+**🎨 Professional UI**
+- SoundCloud-inspired design
+- Modern, responsive interface
+- Mobile-first approach
+
+**⚡ Real-time Features**
+- Live chat and notifications
+- Music synchronization
+- Socket.IO powered
+
+**📊 Analytics Dashboard**
+- Detailed streaming statistics
+- Performance insights
+- Revenue tracking
+
+**🔧 Admin Panel**
+- Complete platform management
+- Content moderation tools
+- User management system
+
+</td>
+</tr>
+</table>
 
 ## 🚀 Quick Start
 
@@ -299,6 +373,16 @@ For support, feature requests, or bug reports:
 
 ---
 
-**MBR Records** - Empowering independent artists and record labels with professional digital music platform technology.
+<div align="center">
+  <img src="./assets/logo.svg" alt="MBR Records Logo" width="80" height="80" />
+  
+  **MBR Records** - Empowering independent artists and record labels with professional digital music platform technology.
 
-Built with ❤️ for the music community.
+  Built with ❤️ for the music community.
+  
+  <p>
+    <a href="https://github.com/Debalent/MBR-">🌟 Star on GitHub</a> •
+    <a href="https://github.com/Debalent/MBR-/issues">🐛 Report Bug</a> •
+    <a href="https://github.com/Debalent/MBR-/issues">💡 Request Feature</a>
+  </p>
+</div>
