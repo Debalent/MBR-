@@ -5,9 +5,17 @@ const crypto = require('crypto');
 const { body, validationResult } = require('express-validator');
 const rateLimit = require('express-rate-limit');
 const User = require('../Models/User');
-const authMiddleware = require('../middleware/authMiddleware');
-const upload = require('../middleware/uploadMiddleware');
+const authMiddleware = require('../Middleware/authMiddleware');
+const upload = require('../Middleware/uploadMiddleware');
 const EmailService = require('../Services/EmailService');
+const {
+  validatePasswordStrength,
+  accountLockoutProtection,
+  trackFailedLogin,
+  trackSuccessfulLogin,
+  checkPasswordHistory,
+  updatePasswordHistory
+} = require('../Middleware/enhancedSecurity');
 
 const router = express.Router();
 
@@ -32,10 +40,13 @@ const registerValidation = [
     .normalizeEmail()
     .withMessage('Please provide a valid email'),
   body('password')
-    .isLength({ min: 8 })
-    .withMessage('Password must be at least 8 characters long')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
-    .withMessage('Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'),
+    .custom((value) => {
+      const validation = validatePasswordStrength(value);
+      if (!validation.isValid) {
+        throw new Error(validation.errors.join(', '));
+      }
+      return true;
+    }),
   body('confirmPassword')
     .custom((value, { req }) => {
       if (value !== req.body.password) {
@@ -67,7 +78,7 @@ const generateToken = (userId) => {
 // @desc    Register user
 // @route   POST /api/auth/register
 // @access  Public
-router.post('/register', authLimiter, registerValidation, async (req, res) => {
+router.post('/register', registerValidation, async (req, res) => {
   try {
     // Check for validation errors
     const errors = validationResult(req);
@@ -137,7 +148,7 @@ router.post('/register', authLimiter, registerValidation, async (req, res) => {
 // @desc    Login user
 // @route   POST /api/auth/login
 // @access  Public
-router.post('/login', authLimiter, loginValidation, async (req, res) => {
+router.post('/login', accountLockoutProtection, loginValidation, async (req, res) => {
   try {
     // Check for validation errors
     const errors = validationResult(req);
@@ -171,11 +182,16 @@ router.post('/login', authLimiter, loginValidation, async (req, res) => {
     // Verify password
     const isPasswordValid = await user.comparePassword(password);
     if (!isPasswordValid) {
+      // Track failed login attempt
+      await trackFailedLogin(user, req.ip);
       return res.status(401).json({
         success: false,
         message: 'Invalid email or password'
       });
     }
+
+    // Track successful login
+    await trackSuccessfulLogin(user, req.ip, req.get('User-Agent'));
 
     // Update last active
     await user.updateLastActive();
@@ -339,10 +355,13 @@ router.put('/profile', authMiddleware, [
 router.put('/change-password', authMiddleware, [
   body('currentPassword').notEmpty().withMessage('Current password is required'),
   body('newPassword')
-    .isLength({ min: 8 })
-    .withMessage('New password must be at least 8 characters long')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
-    .withMessage('New password must contain at least one uppercase letter, one lowercase letter, one number, and one special character')
+    .custom((value) => {
+      const validation = validatePasswordStrength(value);
+      if (!validation.isValid) {
+        throw new Error(validation.errors.join(', '));
+      }
+      return true;
+    })
 ], async (req, res) => {
   try {
     // Check for validation errors
@@ -374,9 +393,22 @@ router.put('/change-password', authMiddleware, [
       });
     }
 
-    // Update password
+    // Check password history
+    const historyCheck = await checkPasswordHistory(user._id, newPassword);
+    if (!historyCheck.isValid) {
+      return res.status(400).json({
+        success: false,
+        message: historyCheck.message
+      });
+    }
+
+    // Update password and history
+    const newPasswordHash = await bcrypt.hash(newPassword, 12);
     user.password = newPassword;
     await user.save();
+
+    // Update password history
+    await updatePasswordHistory(user._id, newPasswordHash);
 
     res.json({
       success: true,
@@ -495,13 +527,16 @@ router.post('/forgot-password', authLimiter, [
 // @desc    Reset password
 // @route   POST /api/auth/reset-password
 // @access  Public
-router.post('/reset-password', authLimiter, [
+router.post('/reset-password', [
   body('token').notEmpty().withMessage('Reset token is required'),
   body('newPassword')
-    .isLength({ min: 8 })
-    .withMessage('New password must be at least 8 characters long')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
-    .withMessage('New password must contain at least one uppercase letter, one lowercase letter, one number, and one special character')
+    .custom((value) => {
+      const validation = validatePasswordStrength(value);
+      if (!validation.isValid) {
+        throw new Error(validation.errors.join(', '));
+      }
+      return true;
+    })
 ], async (req, res) => {
   try {
     // Check for validation errors

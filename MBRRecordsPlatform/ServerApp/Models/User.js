@@ -166,6 +166,72 @@ const userSchema = new mongoose.Schema({
   isActive: {
     type: Boolean,
     default: true
+  },
+  // Enhanced security fields
+  loginAttempts: {
+    type: Number,
+    default: 0
+  },
+  accountLocked: {
+    type: Boolean,
+    default: false
+  },
+  lockoutExpires: {
+    type: Date,
+    default: null
+  },
+  lastFailedLogin: {
+    type: Date,
+    default: null
+  },
+  lastFailedLoginIP: {
+    type: String,
+    default: null
+  },
+  lastLogin: {
+    type: Date,
+    default: null
+  },
+  lastLoginIP: {
+    type: String,
+    default: null
+  },
+  lastLoginUserAgent: {
+    type: String,
+    default: null
+  },
+  loginHistory: [{
+    timestamp: Date,
+    ip: String,
+    userAgent: String,
+    successful: Boolean
+  }],
+  passwordHistory: [{
+    type: String,
+    select: false // Don't return by default
+  }],
+  // GDPR consent tracking
+  consent: {
+    analytics: {
+      granted: { type: Boolean, default: false },
+      timestamp: Date,
+      ip: String
+    },
+    marketing: {
+      granted: { type: Boolean, default: false },
+      timestamp: Date,
+      ip: String
+    },
+    personalization: {
+      granted: { type: Boolean, default: false },
+      timestamp: Date,
+      ip: String
+    },
+    third_party: {
+      granted: { type: Boolean, default: false },
+      timestamp: Date,
+      ip: String
+    }
   }
 }, {
   timestamps: true,

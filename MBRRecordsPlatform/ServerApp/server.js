@@ -17,11 +17,24 @@ const demoRoutes = require('./Routes/demoRoutes');
 const chatRoutes = require('./Routes/chatRoutes');
 const adminRoutes = require('./Routes/adminRoutes');
 const analyticsRoutes = require('./Routes/analyticsRoutes');
+const distributionRoutes = require('./Routes/distributionRoutes');
+const royaltyRoutes = require('./Routes/royaltyRoutes');
+const metadataRoutes = require('./Routes/metadataRoutes');
+const contractRoutes = require('./Routes/contractRoutes');
+const gdprRoutes = require('./Routes/gdprRoutes');
 
 // Import middleware
 const authMiddleware = require('./Middleware/authMiddleware');
 const errorHandler = require('./Middleware/errorHandler');
 const fileUpload = require('./Middleware/fileUpload');
+const { drmProtection, antiPiracyProtection } = require('./Middleware/drmProtection');
+const { gdprConsent } = require('./Middleware/gdprCompliance');
+const {
+  validateSessionSecurity,
+  detectSuspiciousActivity,
+  securityHeaders,
+  sanitizeInput
+} = require('./Middleware/enhancedSecurity');
 
 // Import models
 const User = require('./Models/User');
@@ -39,7 +52,13 @@ const io = new Server(server, {
   transports: ['websocket', 'polling']
 });
 
-// Security middleware
+// Enhanced security middleware
+app.use(securityHeaders);
+app.use(detectSuspiciousActivity);
+app.use(validateSessionSecurity);
+app.use(sanitizeInput);
+
+// Additional helmet configuration
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -50,10 +69,15 @@ app.use(helmet({
       mediaSrc: ["'self'", "https:", "blob:"],
       scriptSrc: ["'self'", "'unsafe-inline'"],
       connectSrc: ["'self'", "ws:", "wss:", "https:"],
-      frameSrc: ["'self'", "https:"]
+      frameSrc: ["'none'"] // More restrictive
     }
   },
-  crossOriginResourcePolicy: { policy: "cross-origin" }
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true
+  }
 }));
 
 // Rate limiting
@@ -138,6 +162,18 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // File upload middleware
 app.use('/api/upload', fileUpload);
 
+// DRM and anti-piracy protection
+app.use('/api/tracks/:trackId/stream', drmProtection({
+  requireLicense: true,
+  allowPreview: true,
+  previewDuration: 30
+}));
+app.use('/api/tracks/:trackId/download', drmProtection({
+  requireLicense: true,
+  watermarkEnabled: true
+}));
+app.use('/api/tracks', antiPiracyProtection);
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ 
@@ -149,6 +185,9 @@ app.get('/health', (req, res) => {
   });
 });
 
+// GDPR consent middleware (applied to all routes)
+app.use(gdprConsent);
+
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/tracks', trackRoutes);
@@ -157,6 +196,11 @@ app.use('/api/demos', demoRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/distribution', distributionRoutes);
+app.use('/api/royalties', royaltyRoutes);
+app.use('/api/metadata', metadataRoutes);
+app.use('/api/contracts', contractRoutes);
+app.use('/api/gdpr', gdprRoutes);
 
 // Socket.IO connection handling
 io.on('connection', (socket) => {
